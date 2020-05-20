@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
@@ -15,12 +14,12 @@ public class HomePage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	// Elements
+	// Elementos
 	
-	@FindBy(how = How.LINK_TEXT, using = "Sign In")
+	@FindBy(how = How.LINK_TEXT, using = "Sign in")
 	private WebElement signInButton;
 	
-	// Actions
+	// Acoes
 	
 	public void signInButton_click() {
 		signInButton.click();

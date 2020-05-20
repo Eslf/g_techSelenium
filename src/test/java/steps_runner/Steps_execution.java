@@ -5,7 +5,7 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.junit.Cucumber;
 
 @RunWith (Cucumber.class)
-@CucumberOptions (features="features",glue= {"steps_map"})
+@CucumberOptions (features="features",glue= {"steps_mapper"})
 
 public class Steps_execution {
 

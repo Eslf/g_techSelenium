@@ -13,6 +13,10 @@ import org.openqa.selenium.By;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.When;
 import models.Cadastro;
+import pages.HomePage;
+import pages.MyAccountPage;
+import pages.RegisterPage;
+import pages.SignInPage;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.And;
 
@@ -42,7 +46,7 @@ public class Step_mapping {
 	
 	// Steps para criar uma nova conta
 	
-	@Given ("^Acessada a pagina da loja$")
+	@Given ("Acessada a pagina da loja")
 	   public void lojahomePage_open() {
 	   	System.setProperty("webdriver.firefox.driver", "/usr/local/bin/geckodriver");
 			driver = new FirefoxDriver();
@@ -51,24 +55,33 @@ public class Step_mapping {
 		    driver.manage().deleteAllCookies();
 	   }
 	
-	@And ("^E clicado o botao Sign in$")
+	@And ("E clicado o botao Sign in")
 	public void signInButton_click() {
-		
+		HomePage homePage = new HomePage(driver);
+		homePage.signInButton_click();
 	}
 	
-	@Given ("^Ao preencher um e-mail e clicar no botao de Create an account$")
+	@Given ("Ao preencher um e-mail e clicar no botao de Create an account")
 	public void typeEmailNewAccountButton_click() {
+		SignInPage signinPage = new SignInPage(driver);
+		signinPage.typeNewEmail();
+		signinPage.clickNewAccount();
 		
 	}
 	
-	@And ("^E preencher todos os dados obrigatorios da compra$")
-	public void fillOutAccountFormRegisterButton_click() {
-		
+	@And ("E preencher todos os dados obrigatorios da compra")
+	public void fillOutAccountFormAndRegisterButton_click() {
+		RegisterPage registerPage = new RegisterPage(driver);
+		registerPage.fillOutForm_method(driver);
+		System.out.println("fillOutAccountFormRegisterButton_click() Done!");
 	}
 	
-	@Then ("^O site abre a pagina de detalhes da conta$")
+	@Then ("O site abre a pagina de detalhes da conta")
 	public void myAccountPage_validate() {
-		
+		MyAccountPage myAccountPage = new MyAccountPage(driver);
+		myAccountPage.validateMyAccountPage_method();
+		System.out.println("myAccountPage_validate() Done!");
+		driver.close();
 	}
 	
 }
