@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import models.Cadastro;
+
 import org.openqa.selenium.support.ui.Select;
 
 public class RegisterPage {
@@ -22,9 +24,6 @@ public class RegisterPage {
 	
 	@FindBy(how = How.ID, using = "id_gender1")
 	private WebElement gender_radioButton;
-	//WebDriverWait wait_id_gender1 = new WebDriverWait(driver, 3);
-	//wait_id_gender1.until(ExpectedConditions.visibilityOfElementLocated(By.id("id_gender1")));
-	//driver.findElement(By.cssSelector("#id_gender1")).click();
 	
 	@FindBy(how = How.CSS, using = "#customer_firstname")
 	private WebElement firstName_input;
@@ -44,9 +43,6 @@ public class RegisterPage {
 	@FindBy(how = How.NAME, using = "id_state")
 	private WebElement state_selectable;
 	
-	//Select lista_estados = new Select(driver.findElement(By.name("id_state")));
-	//lista_estados.selectByVisibleText(pedido.getEstado());
-	
 	@FindBy(how = How.CSS, using = "#postcode")
 	private WebElement postcode_input;
 	
@@ -59,10 +55,21 @@ public class RegisterPage {
 	@FindBy(how = How.CSS, using = "#submitAccount")
 	private WebElement submitAccount_button;
 	
-	/*
-	driver.findElement(By.cssSelector("#alias")).clear();
-	driver.findElement(By.cssSelector("#alias")).sendKeys(pedido.getAliasEndereco());
-	*/
+	// Secao dedicada a gerar/inserir os dados a serem utilizados pelo pedido
+	
+	static Cadastro cadastro = new Cadastro();
+	
+	public void geraDadosCadastro() {
+		cadastro.setNome("Nome");
+		cadastro.setSobrenome("Sobrenome do Cliente");
+		cadastro.setSenha("S3nh@");
+		cadastro.setTelefone("12125558737");
+		cadastro.setRua("711 11th Ave");
+		cadastro.setCidade("New York");
+		cadastro.setCep("10019");
+		cadastro.setEstado("New York");
+		cadastro.setAliasEndereco("Commercial Address");
+	}
 	
 	// Acoes
 	
@@ -73,40 +80,40 @@ public class RegisterPage {
 	}
 	
 	private void firstName_fillOut() {
-		firstName_input.sendKeys("Nome");
+		firstName_input.sendKeys(cadastro.getNome());
 	}
 	
 	private void lastName_fillOut() {
-		lastName_input.sendKeys("Sobrenome do Cliente");
+		lastName_input.sendKeys(cadastro.getSobrenome());
 	}
 	
 	private void password_fillOut() {
-		password_input.sendKeys("S3nh@");
+		password_input.sendKeys(cadastro.getSenha());
 	}
 	
 	private void address_fillOut() {
-		address_input.sendKeys("711 11th Ave");
+		address_input.sendKeys(cadastro.getRua());
 	}
 	
 	private void city_fillOut() {
-		city_input.sendKeys("New York");
+		city_input.sendKeys(cadastro.getCidade());
 	}
 	
 	private void state_selection() {
 		Select lista_estados = new Select(state_selectable);
-		lista_estados.selectByVisibleText("New York");
+		lista_estados.selectByVisibleText(cadastro.getEstado());
 	}
 	
 	private void postcode_fillOut() {
-		postcode_input.sendKeys("10019");
+		postcode_input.sendKeys(cadastro.getCep());
 	}
 	
 	private void phoneMobile_fillOut() {
-		phoneMobile_input.sendKeys("12125558737");
+		phoneMobile_input.sendKeys(cadastro.getTelefone());
 	}
 	
 	private void aliasAddress_fillOut() {
-		aliasAddress_input.sendKeys("Commercial Address");
+		aliasAddress_input.sendKeys(cadastro.getAliasEndereco());
 	}
 	
 	private void submitAccountButton_click() {
@@ -116,6 +123,7 @@ public class RegisterPage {
 	// Acoes centralizadas num unico metodo
 	
 	public void fillOutForm_method(WebDriver driver) {
+		geraDadosCadastro();
 		selectGender(driver);
 		firstName_fillOut();
 		lastName_fillOut();

@@ -41,7 +41,6 @@ public class SignInPage {
 	public void typeNewEmail() {
 		
 		String newEmail = generateRandomEmail();
-		System.out.println(newEmail);
 		createAccountEmail_input.sendKeys(newEmail);
 	}
 	
